@@ -58,6 +58,7 @@ required_packages <- c(
   "R.utils",
   "sandwich",
   "scales",
+  "texreg",
   "tidyverse",
   "tinytex",
   "tufte",
