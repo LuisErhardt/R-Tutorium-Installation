@@ -1,0 +1,294 @@
+---
+title: "Hinweise zur Installation von R"
+author: "Claudius Gräbner"
+date: "01.04.2021"
+output:
+  pdf_document:
+    number_sections: yes
+    latex_engine: lualatex
+header-includes:
+- \usepackage {hyperref}
+- \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(here)
+```
+
+In diesem Dokument beschreibe ich die notwendigen Schritte zur Installation von
+`R` und `R-Studio`. 
+Die folgenden Schritte sind notwendig:
+
+1. Installation von R
+2. Installation von R-Studio
+3. Installation der relevanten Pakete
+4. Installation einer passenden LaTex-Distribution
+
+Bei Fragen und Problemen konsultieren Sie bitte zuerst die FAQ am Ende dieser
+Anleitung und nutzen ansonsten bitte das einschlägige Forum im Moodle-Raum
+der Tutorien. Bitte sehen Sie von Emails an die Lehrenden ab - die meisten
+Fragen betreffen nicht nur Sie allein und von Fragen in den Foren profitieren
+alle.
+
+# Installation von R
+
+Die Installation von `R` ist je nach Betriebssystem unterschiedlich, aber meist
+unproblematisch.
+Gehen Sie am besten auf die [R Homepage](https://www.r-project.org/) und laden
+Sie sich die für Ihr System relevante Version von R herunter.
+Falls Sie Mac-Nutzer:in sind und Homebrew verwenden, sollten Sie am besten
+[diese Version](https://github.com/sethrfore/homebrew-r-srf) installieren.
+
+Falls Sie R bereits installiert haben: checken Sie bitte ob Sie eine aktuelle
+Version von R installiert haben. Sie sollten für den Kurs mindestens `R 4.0.4` 
+installiert haben.
+Die aktuell installierte Version wird beim Start von R angezeigt.
+Falls Sie eine ältere Version von R installiert haben, führen Sie bitte ein
+Update durch. In der Regel ist es dabei am einfachsten, R einfach komplett neu
+zu installieren. In diesem Fall müssen Sie zwar alle Pakete neu installieren,
+aber das ist in der Regel kein Problem und sollte von Zeit zu Zeit ohnehin
+passieren.
+
+# Installation von R-Studio
+
+R-Studio ist eine grafische Oberfläche für R - genauer: ein 
+*Integrated Development Environment* (IDE), das viele nützliche Funktionen hat
+und das wir während dem Kurs standardmäßig verwenden werden.
+Auch hier ist die Installation unproblematisch: einfach auf die 
+[R-Studio Homepage](https://rstudio.com/products/rstudio/download/) 
+gehen und die passende Version installieren.
+Wählen Sie auf jeden Fall die kostenlose Desktop-Variante!
+Mac und Homebrew-Nutzer:innen verwenden dabei am besten 
+[diese Formel](https://formulae.brew.sh/cask/rstudio).
+
+# Installation der notwendigen R-Pakete
+
+R lebt von einer großen Community, die über so genannte Pakete ständig neue
+Funktionalitäten bereit stellt. 
+Was Pakete genau sind und wie sie funktionieren wird an späterer Stelle und 
+auch im 
+[Vorlesungsskript](https://graebnerc.github.io/RforSocioEcon/basics.html#es:pakete) 
+(Abschnitt 3.4) eingehend erläutert.
+An dieser Stelle ist es nur wichtig, dass Sie bereits alle Pakete, die Sie im 
+Laufe des Semesters brauchen werden, bereits jetzt installieren.
+
+Dazu ist es notwendig, dass Sie über eine funktionierende Internetverbindung
+verfügen.
+Gehen Sie dann folgendermaßen vor:
+
+1. Laden Sie sich von 
+[dieser Seite](https://github.com/graebnerc/Methoden21-Installation) 
+den Code als ZIP-Archiv herunter indem 
+Sie auf `Code/Download ZIP` klicken: 
+```{r fig.align='center', out.width='90%', echo=FALSE}
+knitr::include_graphics(
+  here("Installationshinweise/figs/download_code_git.png"))
+```
+Entpacken Sie das Archiv an einem geeigneten Ort auf Ihrem Computer.
+
+2. Öffnen Sie das R-Projekt durch einen Doppelklick auf die Datei
+`Installation.Rproj`.
+3. Öffnen Sie die Datei `install_packages.R` in R-Studio.
+4. Passen Sie die erste Zeile so an, dass Sie zu Ihrem Betriebssystem passt.
+Die beiden folgenden Bilder zeigen, wie die erste Zeile aussehen muss wenn Sie
+einen Mac oder einen Windows-Computer verwenden:
+```{r fig.align='center', out.width='90%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/firstline_mac.png"))
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/firstline_windows.png"))
+```
+5. Markieren sie die Zeilen 1-38 und klicken Sie auf den Button `Run`:
+
+```{r fig.align='center', out.width='50%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/click-run.png"))
+```
+
+6. Schauen Sie ob das Paket `here` ohne Probleme installiert werden konnte.
+Sie erhalten in der Konsole eine entsprechende Nachricht (bei Fehlern machen
+Sie einen Screenshot und posten das Problem in das einschlägige Moodle-Forum):
+
+```{r fig.align='center', out.width='50%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/success-message1.png"))
+```
+
+7. Markieren Sie den Rest des Skript von Zeile 39 abwärts und führen Sie es aus.
+Falls Sie die Nachricht erhalten, dass alle Pakete erfolgreich installiert 
+wurden - wunderbar:
+```{r fig.align='center', out.width='50%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/success-message2.png"))
+```
+Ansonsten posten Sie bitte das File `Installationslogbuch.txt` und
+einen Screenshot mit dem Fehler in das einschlägige Forum.
+
+# Installation einer LaTex-Distribution
+
+Damit Sie mit
+[R-Markdown](https://rmarkdown.rstudio.com/)
+PDF-Dokumente erstellen können müssen Sie noch eine
+[Latex-Distribution](https://www.latex-project.org/).
+Wir empfehlen Ihnen in jedem Fall die Distribution
+[tinytex](https://yihui.org/tinytex/)
+zu installieren, unabhängig davon, ob Sie bereits über eine andere
+Distribution verfügen.
+
+Im vorherigen Schritt haben Sie das Paket `tinytex` bereits installiert.
+Damit ist die tinytex-Distribution aber noch **nicht** installiert.
+Dazu müssen Sie bei bestehender Internetverbindung noch folgenden Befehl 
+in Ihrer R-Konsole ausführen:
+
+```{r, eval=FALSE}
+tinytex::install_tinytex()
+```
+
+Beachten Sie, dass das einen kurzen Augenblick dauern kann und dass ca. 65 MB 
+an Dateien aus dem Internet heruntergeladen werden.
+
+Im Anschluss empfehlen wir Ihnen noch das Dokument `test.Rmd` herunterzuladen.
+Sie finden es in dem Zip-Archiv, das Sie sich weiter oben heruntergeladen 
+haben (Unterordner `Installationshinweise`).
+Nun erstellen Sie bitte das entsprechende PDF, indem Sie die Datei `test.Rmd`
+über R-Studio öffnen und dann auf `Knit to PDF` klicken:
+
+```{r fig.align='center', out.width='50%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/rmarkdown-make-pdf.png"))
+```
+
+Wenn das funktioniert können Sie R-Markdown verwenden. Falls es zu Fehlern 
+kommt nutzen Sie bitte das Forum im Moodle-Raum für das R-Tutorium und posten
+Sie in jedem Fall einen Screenshot mit Ihrer Fehlermeldung.
+
+# FAQ
+
+An dieser Stelle werden Fragen und Probleme, die in der Vergangenheit hin und
+wieder aufgetreten sind, beantwortet. Alle Fragen, die hier nicht aufgeführt
+wurden stellen Sie bitte im entsprechenden Online-Forum des Moodle-Raums
+der Tutorien.
+
+## Probleme bei der Installation von tinytex auf dem Mac
+
+Diese Antwort sollte Ihnen weiterhelfen wenn Sie nach der versuchten Installation
+von `tinytex` einen der folgenden Fehler erhalten:
+
+```{r fig.align='center', out.width='75%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/tiny_error_1.png"))
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/tiny_error_2.png"))
+```
+
+In diesem Fall geben Sie zunächst in Ihrer R Konsole folgendes ein:
+
+```{r, eval=FALSE}
+tinytex::install_tinytex(force = TRUE)
+```
+
+
+Danach schließen Sie R-Studio, starten Ihren Rechner neu und probieren ob
+Sie `test.Rmd` nun kompillieren können. Falls nicht, öffnen Sie bitte Ihren
+Mac Terminal (über die App `Terminal`) und geben folgendes ein:
+
+```
+sudo chown -R `whoami`:admin /usr/local/bin
+
+~/Library/TinyTeX/bin/x86_64-darwin/tlmgr path add
+```
+
+Dann starten installieren Sie tinytex mit dem oben beschriebenen Befehl neu,
+starten Ihren Computer neu und versuchen erneut `test.Rmd` zu kompillieren.
+
+## Problem bei der Installation von matlib auf MacOS
+
+Manchmal führt die Installation des Pakets `matlib` zu Problemen auf dem 
+Mac. Das Paket bekommt nach Ausführung des obigen Skripts im
+Installationslogbuch den Status `FALSE` und wenn Sie das Paket mit dem Befehl
+
+```{r, eval=FALSE}
+library(matlib)
+```
+
+laden wollen erhalten Sie in etwa folgende Fehlermeldung:
+
+```{r fig.align='center', out.width='75%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/matlib_error.png"))
+```
+
+Installieren Sie in diesem Falle die Software `xquartz` von der Homepage
+[https://www.xquartz.org/](https://www.xquartz.org/) und installieren Sie
+das Paket `matlib` nach einem Neustart Ihres Computers erneut. Dann sollte
+
+```{r, eval=FALSE}
+library(matlib)
+```
+
+ohne Probleme ausgeführt werden können und nach Durchlauf des Installationsskripts 
+sollte es keinen Fehler mehr geben.
+
+### Meldung über notwendige Installation der Developer Tools 
+
+Dieser Punkt ist relevant wenn Sie beim Start von `R-Studio` immer folgende
+Meldung erhalten:
+
+```{r fig.align='center', out.width='75%', echo=FALSE}
+knitr::include_graphics(
+  path = here("Installationshinweise/figs/git_error.png"))
+```
+
+Grundsätzlich schadet es nicht, die Apple Developer Tools zu installieren, weil
+viele Programme, die Sie in der wissenschaftlichen Praxis benötigen, deren
+Installation voraussetzen. Gleichzeitig benötigen sie sehr viel Speicher, was
+bei manchen Computern zu Problemen führen kann. Daher werden im Folgedenden
+zwei Alternative Lösungen beschrieben.
+
+Wenn Sie über ausreichend freien Speicher verfügen sollten Sie Ihre App
+`Terminal` öffnen nud folgenden Befehl eingeben:
+
+```
+xcode-select --install
+```
+
+Wenn Sie aufgefordert werden Xcode oder die Command Line Tools zu 
+installieren tun Sie das bitte. Geben Sie nun in den Terminal ein:
+
+```
+git --version
+```
+
+Wenn Sie jetzt die Command Line Tools oder Developer Tools installieren sollen, 
+dann machen Sie das wie beschrieben und geben den Befehl danach erneut ein.
+Wenn Ihnen jetzt ohne Fehler eine Version angezeigt wird, hat alles geklappt. 
+Starten Sie Ihren Rechner neu und dann sollte das in R-Studio auch gehen.
+
+Wenn diese Stragegie nicht erfolgreich ist oder Sie nicht genügend freien 
+Speicher haben, dann gehen Sie auf die Seite
+[http://git-scm.com/download/mac](http://git-scm.com/download/mac) und 
+installieren Sie `Git` so wie dort beschrieben. 
+
+Nach der Installation führen Sie dann noch über Ihre Terminal-App folgene 
+zwei Befehle aus:
+
+```
+echo "PATH=/usr/local/git/bin:\$PATH" >> ~/.zshrc
+
+source ~/.zshrc
+```
+
+Oder wenn Sie bereits MacOS 11 oder neuer verwenden:
+
+```
+echo "PATH=/usr/local/git/bin:\$PATH" >> ~/.zshrc
+
+source ~/.zshrc
+```
+
+Nach einem Neustart des Computers sollte das Problem damit behoben sein.
+
