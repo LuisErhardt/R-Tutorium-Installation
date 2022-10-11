@@ -1,8 +1,11 @@
-your_platform <- "mac" # Bitte eines der drei eintragen: mac, linux or windows
+your_platform <- "mac_arm" # Bitte eines der vier eintragen: mac, mac_arm, linux or windows
 
 if (your_platform=="mac"){
   install_type <- "mac.binary"
   options(install.packages.check.source = "no")
+} else if (your_platform=="mac_arm"){
+    install_type <- "binary"
+    options(install.packages.check.source = "yes")
 } else if (your_platform=="windows"){
   install_type <- "win.binary"
   options(install.packages.check.source = "no")
