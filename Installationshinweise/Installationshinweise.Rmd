@@ -55,7 +55,7 @@ oben auf den Apfel klicken und dann das Menü "Über diesen Mac" aufrufen.
 
 
 Falls Sie R bereits installiert haben: checken Sie bitte ob Sie eine aktuelle
-Version von R installiert haben. Sie sollten für den Kurs mindestens `R 4.0.4` 
+Version von R installiert haben. Sie sollten für den Kurs mindestens `R 4.2.1` 
 installiert haben.
 Die aktuell installierte Version wird beim Start von R angezeigt.
 Falls Sie eine ältere Version von R installiert haben, führen Sie bitte ein
