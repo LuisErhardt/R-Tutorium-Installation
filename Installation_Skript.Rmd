@@ -1,0 +1,242 @@
+---
+title: "Installation der Packages"
+author: "Jonas Schulte"
+date: "2023-04-02"
+output: pdf_document
+---
+
+
+# Installation der notwendigen R-Pakete
+
+R lebt von einer großen Community, die über so genannte Pakete ständig neue Funktionalitäten bereit stellt. Was Pakete genau sind und wie sie funktionieren wird an späterer Stelle und auch im Vorlesungsskript (Abschnitt 3.4) eingehend erläutert. An dieser Stelle ist es nur wichtig, dass Du bereits alle Pakete, die Du im Laufe des Semesters brauchen wirst, bereits jetzt installierst.
+
+1. Um die Installation automatisch durchzuführen, werden wir zunächst einige Funktionen definieren. Wie sie genau funktionieren, ist an dieser Stelle nicht wichtig, du kannst dir aber bei Interesse die Kommentare im Code durchlesen. Um die Funktionen zu definieren, lasse den folgenden Codeblock durchlaufen, in dem du auf das grüne Dreieck rechts oben im Codeblock klickst. Wenn alles funktioniert hat, sollte jetzt im rechts oben in RStudio im Feld Environment vier Funktionen definiert sein. 
+
+```{r setup, include=FALSE}
+# Define a function to check for faulty packages
+check_faulty_packages <- function() {
+  # Get a list of all installed packages
+  pkgs <- installed.packages()[, "Package"]
+  
+  # Check if the packages are loaded correctly
+  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
+
+  # Find the faulty packages
+  faulty <- pkgs[!success]
+  
+  # Print the names of the faulty packages
+  if (length(faulty) == 0) {
+    cat("\n\033[32mNo faulty packages were found\033[39m\n")
+  } else {
+    cat("\n\033[31mThe following packages might be faulty:\033[39m\n")
+    for (i in faulty) {
+      cat("- ", i, "\n", sep = "")
+    }
+  }
+  
+  # Return a vector indicating which packages are faulty
+  return(invisible(faulty))
+}
+
+# Define a function to check if packages are installed
+check_installed_packages <- function(pkg_names) {
+  # Get a list of all installed packages
+  installed_pkgs <- installed.packages()[, "Package"]
+  
+  # Check if the requested packages are installed
+  is_installed <- pkg_names %in% installed_pkgs
+  
+  # Print a message indicating which packages are installed
+  if (all(is_installed)) {
+    # Print the success message in green
+    cat("\n\033[32mAll requested packages are installed.\033[39m\n")
+  } else if (any(is_installed)) {
+    not_installed <- pkg_names[!is_installed]
+    cat("\n\033[31mThe following packages are not installed:\033[39m\n")
+    cat(not_installed, "\n")
+    # Return a vector indicating which packages are not installed
+    return(invisible(not_installed))
+  } else {
+    cat("\n\033[31mNone of the requested packages are installed.\033[39m\n")
+    # Return a vector indicating which packages are not installed
+    return(invisible(not_installed))
+  }
+}
+
+# Define a function to reinstall faulty packages
+reinstall_faulty_packages <- function() {
+   # Determine the operating system
+  os <- Sys.info()["sysname"]
+  
+  # Set the type argument based on the operating system
+  if (os == "Linux") {
+    type <- "binary"
+  } else {
+    type <- getOption("pkgType")
+  }
+  
+  # Check for faulty packages
+  check_faulty_packages()
+  
+  # Get a list of all installed packages
+  pkgs <- installed.packages()[, "Package"]
+  
+  # Check if the packages are loaded correctly
+  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
+  
+  # Find the faulty packages
+  faulty <- pkgs[!success]
+  
+  if (length(faulty) == 0) {
+    cat("\nNo faulty packages found, reinstallation not required.\n")
+  } else {
+    # Detach packages that are currently loaded
+    attached_pkgs <- names(sessionInfo()$otherPkgs)
+    if(!is.null(attached_pkgs)){
+      suppressWarnings(invisible(
+        lapply(paste0('package:', attached_pkgs), 
+               detach, 
+               character.only=TRUE, unload=TRUE)))
+    }
+    
+    # Try to reinstall the faulty packages
+    install.packages(faulty, type=type)
+    
+    # Check if the reinstallation was successful
+    success <- invisible(sapply(faulty, function(x) try(require(x, character.only = TRUE))))
+    
+    # Print a message indicating the result of the reinstallation
+    if (all(success)) {
+      # Print the success message in green
+      cat("\n\033[32mAll faulty packages were successfully reinstalled.\033[39m\n")
+    } else {
+      # Print the error message in red
+      cat("\n\033[31mSome faulty packages were not successfully reinstalled.\033[39m\n")
+      
+      # Print the names and error messages for the failed packages in red
+      for (i in which(!success)) {
+        cat("\033[31m", paste("Package", faulty[i], "failed to install."), "\033[39m\n", sep = "")
+      }
+    }
+  }
+}
+
+# Define a function to install and check a list of packages
+R_tut_install_packages <- function(pkgs) {
+  # Determine the operating system
+  os <- Sys.info()["sysname"]
+  
+  # Set the type argument based on the operating system
+  if (os == "Linux") {
+    type <- "binary"
+  } else {
+    type <- getOption("pkgType")
+  }
+  # Detach packages that are currently loaded
+  attached_pkgs <- names(sessionInfo()$otherPkgs)
+  if(!is.null(attached_pkgs)){
+    suppressWarnings(invisible(
+      lapply(paste0('package:', attached_pkgs), 
+             detach, 
+             character.only=TRUE, unload=TRUE)))
+  }
+  
+  # Install the packages
+  install.packages(pkgs, type = type)
+  
+  # Check if the packages were successfully installed
+  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
+  
+  # Print a message indicating the result of the installation
+  if (all(success)) {
+    cat("\033[32mAll packages were successfully installed!\033[39m\n")
+  } else {
+    # Try to reinstall any failed packages  
+    reinstall_faulty_packages()
+  }
+}
+```
+
+
+2. Im zweiten Schritt erstellen wir einen Vektor mit allen Paketnamen. Lasse den folgenden Codeblock durchlaufen, in dem Du auf das grüne Dreieck rechts oben im Codeblock klickst. 
+```{r}
+packages_list <- c(
+  "AER",
+  "car",
+  "countrycode",
+  "data.table",
+  "dplyr",
+  "fitdistrplus",
+  "gapminder",
+  "gganimate",
+  "ggfortify",
+  "ggplot2",
+  "ggpubr",
+  "ggrepel",
+  "gifski",
+  "haven",
+  "here",
+  "ineq",
+  "latex2exp",
+  "lmtest",
+  "MASS",
+  "matlib",
+  "moments",
+  "optimx",
+  "quanteda",
+  "quanteda.textplots",
+  "rmarkdown",
+  "rmutil",
+  "R.utils",
+  "rtweet",
+  "sandwich",
+  "scales",
+  "skimr",
+  "stargazer",
+  "tibble",
+  "tidyr",
+  "tidyverse",
+  "tinytex",
+  "tufte",
+  "viridis",
+  "WDI"
+)
+```
+
+
+3. Rufe die Funktion `R_tut_install_packages()` auf, in dem Du den folgenden Codeblock aufrufst (grünes Dreieck rechts oben im Codeblock). Die Funktion installiert automatisch alle Packages, die wir in Schritt 2 angegeben haben. Wenn alles geklappt hat, sollte eine grüne Erfolgsmeldung erscheinen. 
+
+```{r message = FALSE}
+R_tut_install_packages(packages_list)
+```
+
+
+4. Optional: Überprüfe mit der Funktion `check_installed_packages()`, ob alle Pakete installiert wurden. Lasse dafür den folgenden Codeblock durchlaufen. Wenn alles funktioniert hat, sollte unterhalb unten in der Konsole bzw. unterhalb des Codeblocks eine grüne Erfolgsmeldung erscheinen. 
+
+```{r message=FALSE, warning = FALSE}
+check_installed_packages(packages_list)
+```
+
+
+
+
+
+# Probleme bei der Installation von Packages
+
+Bei Problemen bei der Installation solltest du zuerst R neu starten. Das kannst du, in dem du den folgenden Codeblock ausführst oder in dem du RStudio schließt und wieder öffnest. 
+
+```{r}
+.rs.restartR()
+```
+
+Anschließend rufst du die folgenden Funktion auf. Die Funktion versucht alle fehlerhaften Package neu zu installieren. Die Funktion sollte dir einen Erfolgsmeldung ausgegeben, wenn alles geklappt hat. Wenn du dir nicht sicher bist, kannst du die Funktion aus 4 und 5 nochmal aufrufen und überprüfen, ob alles geklappt hat. Wenn es immer noch Probleme gibt, starte R erneut und versuche noch ein weitere mal den folgenden Codeblock auszuführen.
+```{r message = FALSE, warning = FALSE}
+reinstall_faulty_packages()
+```
+
+Bestehen weiterhin Probleme, rufe den folgenden Codeblock auf. Die Funktion überprüft, welche Pakete fehlerhaft sind. Mache einen Screenshot davon und erstelle einen neuen Thread im Moodle-Forum.
+```{r}
+check_faulty_packages()
+```
+
+
