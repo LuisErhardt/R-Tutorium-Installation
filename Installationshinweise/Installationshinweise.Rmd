@@ -1,7 +1,7 @@
 ---
 title: "Hinweise zur Installation von R"
-author: "Claudius Gräbner"
-date: "01.04.2021"
+author: "Jonas Schulte"
+date: "01.04.2023"
 output:
   pdf_document:
     number_sections: yes
@@ -9,6 +9,7 @@ output:
 header-includes:
 - \usepackage {hyperref}
 - \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}
+- \setcounter{section}{-1}
 ---
 
 ```{r setup, include=FALSE}
@@ -23,6 +24,7 @@ In diesem Dokument beschreibe ich die notwendigen Schritte zur Installation von
 `R` und `R-Studio`. 
 Die folgenden Schritte sind notwendig:
 
+0. (Nur für Mac-User) Installation von XQuartz
 1. Installation von R
 2. Installation von R-Studio
 3. Installation der relevanten Pakete
@@ -34,14 +36,23 @@ der Tutorien. Bitte sehen Sie von Emails an die Lehrenden ab - die meisten
 Fragen betreffen nicht nur Sie allein und von Fragen in den Foren profitieren
 alle.
 
+# Installation von XQuartz (nur für Mac-User)
+Mac-User benötigen für einige Pakete die Open-Source Software XQuartz. Bitte 
+laden Sie sich die Software von der Homepage [https://www.xquartz.org](https://www.xquartz.org) 
+herunter und installieren sie diese. 
+
 # Installation von R
 
 Die Installation von `R` ist je nach Betriebssystem unterschiedlich, aber meist
 unproblematisch.
-Gehen Sie am besten auf die [R Homepage](https://www.r-project.org/) und laden
-Sie sich die für Ihr System relevante Version von R herunter.
-Falls Sie Mac-Nutzer:in sind und Homebrew verwenden, sollten Sie am besten
-[diese Version](https://github.com/sethrfore/homebrew-r-srf) installieren.
+Gehen Sie am besten auf die Webseite [https://cloud.r-project.org](https://cloud.r-project.org) 
+und laden Sie sich die für Ihr System relevante Version von R herunter.
+
+Wenn Sie einen Mac haben, überprüfen Sie bitte, ob Sie einen Intel oder
+Apple Silicon (M1/M2) Prozessor haben und achten beim Download darauf, die
+richtige Variante auszuwählen. Ihren Prozessor finden Sie heraus, in dem Sie links
+oben auf den Apfel klicken und dann das Menü "Über diesen Mac" aufrufen. 
+
 
 Falls Sie R bereits installiert haben: checken Sie bitte ob Sie eine aktuelle
 Version von R installiert haben. Sie sollten für den Kurs mindestens `R 4.0.4` 
@@ -58,12 +69,11 @@ passieren.
 R-Studio ist eine grafische Oberfläche für R - genauer: ein 
 *Integrated Development Environment* (IDE), das viele nützliche Funktionen hat
 und das wir während dem Kurs standardmäßig verwenden werden.
-Auch hier ist die Installation unproblematisch: einfach auf die 
-[R-Studio Homepage](https://rstudio.com/products/rstudio/download/) 
-gehen und die passende Version installieren.
+Auch hier ist die Installation unproblematisch: einfach auf die Webseite 
+[https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/) 
+gehen und unter `2: Install RStudio` die passende Version installieren.
 Wählen Sie auf jeden Fall die kostenlose Desktop-Variante!
-Mac und Homebrew-Nutzer:innen verwenden dabei am besten 
-[diese Formel](https://formulae.brew.sh/cask/rstudio).
+
 
 # Installation der notwendigen R-Pakete
 
@@ -81,7 +91,7 @@ verfügen.
 Gehen Sie dann folgendermaßen vor:
 
 1. Laden Sie sich von 
-[dieser Seite](https://github.com/graebnerc/Methoden21-Installation) 
+[dieser Seite](https://github.com/jbschulte/R-Tutorium-Installation) 
 den Code als ZIP-Archiv herunter indem 
 Sie auf `Code/Download ZIP` klicken: 
 ```{r fig.align='center', out.width='90%', echo=FALSE}
@@ -92,41 +102,14 @@ Entpacken Sie das Archiv an einem geeigneten Ort auf Ihrem Computer.
 
 2. Öffnen Sie das R-Projekt durch einen Doppelklick auf die Datei
 `Installation.Rproj`.
-3. Öffnen Sie die Datei `install_packages.R` in R-Studio.
-4. Passen Sie die erste Zeile so an, dass Sie zu Ihrem Betriebssystem passt.
-Die beiden folgenden Bilder zeigen, wie die erste Zeile aussehen muss wenn Sie
-einen Mac oder einen Windows-Computer verwenden:
-```{r fig.align='center', out.width='90%', echo=FALSE}
-knitr::include_graphics(
-  path = here("Installationshinweise/figs/firstline_mac.png"))
-knitr::include_graphics(
-  path = here("Installationshinweise/figs/firstline_windows.png"))
-```
-5. Markieren sie die Zeilen 1-38 und klicken Sie auf den Button `Run`:
-
+3. Öffnen Sie die Datei `Installation_Skript.Rmd` in R-Studio.
+4. Folgen Sie den Anweisungen im Skript. Für die Installation müssen Sie
+einige Codeblöcke ausführen. Um einen Codeblock auszuführen, klicken Sie auf 
+das grüne Dreieck rechts oben im Codeblock:
 ```{r fig.align='center', out.width='50%', echo=FALSE}
 knitr::include_graphics(
-  path = here("Installationshinweise/figs/click-run.png"))
+  path = here("Installationshinweise/figs/run_chunk.png"))
 ```
-
-6. Schauen Sie ob das Paket `here` ohne Probleme installiert werden konnte.
-Sie erhalten in der Konsole eine entsprechende Nachricht (bei Fehlern machen
-Sie einen Screenshot und posten das Problem in das einschlägige Moodle-Forum):
-
-```{r fig.align='center', out.width='50%', echo=FALSE}
-knitr::include_graphics(
-  path = here("Installationshinweise/figs/success-message1.png"))
-```
-
-7. Markieren Sie den Rest des Skript von Zeile 39 abwärts und führen Sie es aus.
-Falls Sie die Nachricht erhalten, dass alle Pakete erfolgreich installiert 
-wurden - wunderbar:
-```{r fig.align='center', out.width='50%', echo=FALSE}
-knitr::include_graphics(
-  path = here("Installationshinweise/figs/success-message2.png"))
-```
-Ansonsten posten Sie bitte das File `Installationslogbuch.txt` und
-einen Screenshot mit dem Fehler in das einschlägige Forum.
 
 # Installation einer LaTex-Distribution
 
