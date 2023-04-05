@@ -71,8 +71,10 @@ reinstall_faulty_packages <- function() {
   # Set the type argument based on the operating system
   if (os == "Linux") {
     type <- "binary"
+    options(install.packages.check.source = "yes")
   } else {
     type <- getOption("pkgType")
+    options(install.packages.check.source = "no")
   }
   
   # Check for faulty packages
@@ -129,9 +131,12 @@ R_tut_install_packages <- function(pkgs) {
   # Set the type argument based on the operating system
   if (os == "Linux") {
     type <- "binary"
+    options(install.packages.check.source = "yes")
   } else {
     type <- getOption("pkgType")
+    options(install.packages.check.source = "no")
   }
+  
   # Detach packages that are currently loaded
   attached_pkgs <- names(sessionInfo()$otherPkgs)
   if(!is.null(attached_pkgs)){
