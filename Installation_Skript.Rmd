@@ -1,43 +1,140 @@
 ---
 title: "Installation der Packages"
 author: "Jonas Schulte"
-date: "2023-04-02"
+date: "01.10.2023"
 output: pdf_document
 ---
 
 
 # Installation der notwendigen R-Pakete
 
+## Grundlagen
+
 R lebt von einer großen Community, die über so genannte Pakete ständig neue Funktionalitäten bereit stellt. Was Pakete genau sind und wie sie funktionieren wird an späterer Stelle und auch im Vorlesungsskript (Abschnitt 3.4) eingehend erläutert. An dieser Stelle ist es nur wichtig, dass Du bereits alle Pakete, die Du im Laufe des Semesters brauchen wirst, bereits jetzt installierst.
 
-1. Um die Installation automatisch durchzuführen, werden wir zunächst einige Funktionen definieren. Wie sie genau funktionieren, ist an dieser Stelle nicht wichtig, du kannst dir aber bei Interesse die Kommentare im Code durchlesen. Um die Funktionen zu definieren, lasse den folgenden Codeblock durchlaufen, in dem du auf das grüne Dreieck rechts oben im Codeblock klickst. Wenn alles funktioniert hat, sollte jetzt im rechts oben in RStudio im Feld Environment vier Funktionen definiert sein. 
+R-Pakete installieren wir mit der Funktion `install.packages("Paketname")`. Die Funktion können wir in einem R-Chunk ausführen, in dem wir auf das grüne Dreieck am rechten Rand klicken.
 
-```{r setup, include=FALSE}
-# Define a function to check for faulty packages
-check_faulty_packages <- function() {
-  # Get a list of all installed packages
-  pkgs <- installed.packages()[, "Package"]
-  
-  # Check if the packages are loaded correctly
-  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
+```{r, message = FALSE}
+install.packages("gapminder")
+```
 
-  # Find the faulty packages
-  faulty <- pkgs[!success]
-  
-  # Print the names of the faulty packages
-  if (length(faulty) == 0) {
-    cat("\n\033[32mNo faulty packages were found\033[39m\n")
-  } else {
-    cat("\n\033[31mThe following packages might be faulty:\033[39m\n")
-    for (i in faulty) {
-      cat("- ", i, "\n", sep = "")
-    }
-  }
-  
-  # Return a vector indicating which packages are faulty
-  return(invisible(faulty))
-}
+Hier installieren wir das R-Paket `gapminder`, das uns den Gapminder Datensatz in R zur Verfügung stellt. Um zu testen, ob das Paket korrekt installiert wurde, können wir es mit der Funktion `library(gapminder)` einbinden. Führe dafür den nachfolgenden Codeblock aus, in dem du auf das grüne Dreieck am rechten Rand des Codeblock klickst.
 
+```{r}
+library(gapminder)
+```
+
+Wenn du in der Console (Bereich unten) keine Rückmeldung erhälst, dann hat alles geklappt. Erhälst du aber eine Fehlermeldung (z. B. *Error in library(gapminder) : there is no package called ‘gapminder’*) heißt das, dass bei der Installation etwas schief gelaufen ist. Häufig reicht es, das Paket einfach mit dem Befehl `install.packages()` erneut zu installieren. Manchmal ist es aber komplizierter, und es empfiehlt sich einen Screenshot zu machen, und im Moodle Forum um Hilfe zu suchen.
+
+## Installation aller im Tutorium notwendiger Pakete
+Für das Tutorium brauchen wir noch einige mehr Pakete. Mit der Funktion `install.packages()` können wir mehrere Pakete gleichzeitig installieren. Dafür müssen wir zunächst einen Vektor mit allen notwendigen Paketen definieren. Dafür nutzen wir die Funktion `c()` und schreiben in die Klammern alle notwendigen Paketnamen in Anführungszeichen. Die einzelnen Elemente müssen durch ein Komma getrennt werden. Für die bessere Übersichtlichkeit können wir Zeilenumbrüche in den Code einfügen. Die Liste mit den Paketnamen speichern wir dann in einem Objekt, dem wir den Namen `vektor_mit_allen_paketen` geben. Das sieht dann so aus. Führe den nachfolgenden Codeblock aus (grünes Dreieck):
+
+```{r}
+vektor_mit_allen_paketen <- c(
+  "AER",
+  "car",
+  "countrycode",
+  "data.table",
+  "dplyr",
+  "fitdistrplus",
+  #"gapminder",
+  "gganimate",
+  "ggfortify",
+  "ggplot2",
+  "ggpubr",
+  "ggrepel",
+  "gifski",
+  "haven",
+  "here",
+  "ineq",
+  "latex2exp",
+  "lmtest",
+  "MASS",
+  "matlib",
+  "moments",
+  "optimx",
+  "readxl",
+  "rmarkdown",
+  "rmutil",
+  "R.utils",
+  "sandwich",
+  "scales",
+  "skimr",
+  "stargazer",
+  "tibble",
+  "tidyr",
+  "tidyverse",
+  "tinytex",
+  "tufte",
+  "viridis",
+  "WDI"
+)
+```
+
+Im zweiten Schritt können wir dann alle Pakete installieren. Dafür nutzen wir wieder die Funktion `install.packages()`. Statt den einzelnen Paketnamen, nutzen wir jetzt aber unseren eben definierten Vektor.
+
+```{r, message = FALSE}
+install.packages(vektor_mit_allen_paketen)
+```
+
+
+## Überprüfen der Installation der Pakete
+Jetzt wollen wir überprüfen, ob alle Pakete richtig installiert wurden. Dafür binden wir die Pakete mit der Funktion `library()` in unsere R-Session ein. Diese Funktion müssen wir für jedes Paket einzelnd aufrufen. Der grüne oder rote Balken auf der linken Seite des Codeblocks zeigt dir an, ob der Code fehlerfrei durchläuft (grün) oder an der Stelle eines fehlenden Pakets abbricht (rot).
+
+```{r}
+library(AER)
+library(car)
+library(countrycode)
+library(data.table)
+library(dplyr)
+library(fitdistrplus)
+library(gganimate)
+library(ggfortify)
+library(ggplot2)
+library(ggpubr)
+library(ggrepel)
+library(gifski)
+library(haven)
+library(here)
+library(ineq)
+library(latex2exp)
+library(lmtest)
+library(MASS)
+library(matlib)
+library(moments)
+library(optimx)
+library(readxl)
+library(rmarkdown)
+library(rmutil)
+library(R.utils)
+library(sandwich)
+library(scales)
+library(skimr)
+library(stargazer)
+library(tibble)
+library(tidyr)
+library(tidyverse)
+library(tinytex)
+library(tufte)
+library(viridis)
+library(WDI)
+```
+
+Im besten Fall ist der Codeblock ohne Fehler durchgelaufen (grüner Balken). Dir ist aber vielleicht aufgefallen, dass in der Console (unterer Bereich) sehr viel roter Text erschienen ist. Oben haben wir behauptet, dass das Package dann richtig installiert wurde, wenn wir keine Rückmeldung in der Console erhalten. Das war nur halbrichtig: Einige Pakete geben uns wichtige Informationen und Warnungen, wenn wir ein Paket einbinden. Das sind aber meist keine Fehlermeldung - auch wenn der Text rot ist. Um das zu überprüfen, können wir den obigen Codeblock einfach noch einmal ausführen. Informationen und Warnungen bei der Einbindung von Paketen erhalten wir nur beim ersten Durchlauf. Beim zweiten Durchlauf sollten wir daher überhaupt keine Rückmeldung erhalten. Sollte das der Fall sein, sind alle Pakete richtig installiert und du kannst mit Schritt 4 der Installationsanleitung fortfahren.
+
+
+## Fehler bei der Installation von Paketen
+Bei Problemen bei der Installation solltest du zuerst R neu starten. Das kannst du, in dem du den folgenden Codeblock ausführst oder in dem du RStudio schließt und wieder öffnest. 
+
+```{r}
+.rs.restartR()
+```
+
+Anschließend müssen wir die fehlerhaften Packages ausfindig machen. Am einfachsten geht das, wenn wir den obigen Codeblock Zeile für Zeile durchführen und den Text in der Console beobachten. Klicke dafür mit dem Cursor in die erste Codezeile des Codeblocks (`library(AER)`). Drücke dann gleichzeit Strg + Enter (Windows) bzw. Cmd + Enter (Mac). Die Tastenkombination führt die aktuell ausgewählte Zeile aus und springt dann zur nächsten Zeile. Wir können die Tastenkombination so lange ausführen, bis wir die fehlerhaften Pakete identifiziert haben. Fehlerhafte Pakete erkennen wir durch eine Fehlermeldung in der Console (Führe die Zeile dann ruhig erneut aus, um sicher zu gehen, dass es sich nicht um Informationen oder lediglich Warnungen handelt).
+
+Es gibt natürlich geschicktere Wege, um nicht-installierte Pakete ausfindig zu machen. Du kannst stattdessen auch den nachfolgenden Codeblock ausführen. 
+
+```{r}
 # Define a function to check if packages are installed
 check_installed_packages <- function(pkg_names) {
   # Get a list of all installed packages
@@ -63,185 +160,9 @@ check_installed_packages <- function(pkg_names) {
   }
 }
 
-# Define a function to reinstall faulty packages
-reinstall_faulty_packages <- function() {
-   # Determine the operating system
-  os <- Sys.info()["sysname"]
-  
-  # Set the type argument based on the operating system
-  if (os == "Linux") {
-    type <- "binary"
-    options(install.packages.check.source = "yes")
-  } else {
-    type <- getOption("pkgType")
-    options(install.packages.check.source = "no")
-  }
-  
-  # Check for faulty packages
-  check_faulty_packages()
-  
-  # Get a list of all installed packages
-  pkgs <- installed.packages()[, "Package"]
-  
-  # Check if the packages are loaded correctly
-  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
-  
-  # Find the faulty packages
-  faulty <- pkgs[!success]
-  
-  if (length(faulty) == 0) {
-    cat("\nNo faulty packages found, reinstallation not required.\n")
-  } else {
-    # Detach packages that are currently loaded
-    attached_pkgs <- names(sessionInfo()$otherPkgs)
-    if(!is.null(attached_pkgs)){
-      suppressWarnings(invisible(
-        lapply(paste0('package:', attached_pkgs), 
-               detach, 
-               character.only=TRUE, unload=TRUE)))
-    }
-    
-    # Try to reinstall the faulty packages
-    install.packages(faulty, type=type)
-    
-    # Check if the reinstallation was successful
-    success <- invisible(sapply(faulty, function(x) try(require(x, character.only = TRUE))))
-    
-    # Print a message indicating the result of the reinstallation
-    if (all(success)) {
-      # Print the success message in green
-      cat("\n\033[32mAll faulty packages were successfully reinstalled.\033[39m\n")
-    } else {
-      # Print the error message in red
-      cat("\n\033[31mSome faulty packages were not successfully reinstalled.\033[39m\n")
-      
-      # Print the names and error messages for the failed packages in red
-      for (i in which(!success)) {
-        cat("\033[31m", paste("Package", faulty[i], "failed to install."), "\033[39m\n", sep = "")
-      }
-    }
-  }
-}
-
-# Define a function to install and check a list of packages
-R_tut_install_packages <- function(pkgs) {
-  # Determine the operating system
-  os <- Sys.info()["sysname"]
-  
-  # Set the type argument based on the operating system
-  if (os == "Linux") {
-    type <- "binary"
-    options(install.packages.check.source = "yes")
-  } else {
-    type <- getOption("pkgType")
-    options(install.packages.check.source = "no")
-  }
-  
-  # Detach packages that are currently loaded
-  attached_pkgs <- names(sessionInfo()$otherPkgs)
-  if(!is.null(attached_pkgs)){
-    suppressWarnings(invisible(
-      lapply(paste0('package:', attached_pkgs), 
-             detach, 
-             character.only=TRUE, unload=TRUE)))
-  }
-  
-  # Install the packages
-  install.packages(pkgs, type = type)
-  
-  # Check if the packages were successfully installed
-  success <- sapply(pkgs, function(x) require(x, character.only = TRUE))
-  
-  # Print a message indicating the result of the installation
-  if (all(success)) {
-    cat("\033[32mAll packages were successfully installed!\033[39m\n")
-  } else {
-    # Try to reinstall any failed packages  
-    reinstall_faulty_packages()
-  }
-}
+check_installed_packages(vektor_mit_allen_paketen)
 ```
 
+In der Console sollte dann eine Liste mit den fehlerhaften Packages oder eine Erfolgsmeldung erscheinen. Wenn nicht alle Pakete fehlerfrei installiert wurden, dann versuche das fehlerhafte Paket zunächst erneut zu installieren. Führe dafür in der Console (unten) den install.packages("Name des Pakets") Befehl aus. Achte dabei auf den Text der in der Console erscheint. Wenn die Installation wieder nicht funktioniert, mache einen Screenshot von der Fehlermeldung und erstelle ein neues Thema im Moodle-Forum. 
 
-2. Im zweiten Schritt erstellen wir einen Vektor mit allen Paketnamen. Lasse den folgenden Codeblock durchlaufen, in dem Du auf das grüne Dreieck rechts oben im Codeblock klickst. 
-```{r}
-packages_list <- c(
-  "AER",
-  "car",
-  "countrycode",
-  "data.table",
-  "dplyr",
-  "fitdistrplus",
-  "gapminder",
-  "gganimate",
-  "ggfortify",
-  "ggplot2",
-  "ggpubr",
-  "ggrepel",
-  "gifski",
-  "haven",
-  "here",
-  "ineq",
-  "latex2exp",
-  "lmtest",
-  "MASS",
-  "matlib",
-  "moments",
-  "optimx",
-  "quanteda",
-  "quanteda.textplots",
-  "rmarkdown",
-  "rmutil",
-  "R.utils",
-  "rtweet",
-  "sandwich",
-  "scales",
-  "skimr",
-  "stargazer",
-  "tibble",
-  "tidyr",
-  "tidyverse",
-  "tinytex",
-  "tufte",
-  "viridis",
-  "WDI"
-)
-```
-
-
-3. Rufe die Funktion `R_tut_install_packages()` auf, in dem Du den folgenden Codeblock aufrufst (grünes Dreieck rechts oben im Codeblock). Die Funktion installiert automatisch alle Packages, die wir in Schritt 2 angegeben haben. Wenn alles geklappt hat, sollte eine grüne Erfolgsmeldung erscheinen. 
-
-```{r message = FALSE}
-R_tut_install_packages(packages_list)
-```
-
-
-4. Optional: Überprüfe mit der Funktion `check_installed_packages()`, ob alle Pakete installiert wurden. Lasse dafür den folgenden Codeblock durchlaufen. Wenn alles funktioniert hat, sollte unterhalb unten in der Konsole bzw. unterhalb des Codeblocks eine grüne Erfolgsmeldung erscheinen. 
-
-```{r message=FALSE, warning = FALSE}
-check_installed_packages(packages_list)
-```
-
-
-
-
-
-# Probleme bei der Installation von Packages
-
-Bei Problemen bei der Installation solltest du zuerst R neu starten. Das kannst du, in dem du den folgenden Codeblock ausführst oder in dem du RStudio schließt und wieder öffnest. 
-
-```{r}
-.rs.restartR()
-```
-
-Anschließend rufst du die folgenden Funktion auf. Die Funktion versucht alle fehlerhaften Package neu zu installieren. Die Funktion sollte dir einen Erfolgsmeldung ausgegeben, wenn alles geklappt hat. Wenn du dir nicht sicher bist, kannst du die Funktion aus 4 und 5 nochmal aufrufen und überprüfen, ob alles geklappt hat. Wenn es immer noch Probleme gibt, starte R erneut und versuche noch ein weitere mal den folgenden Codeblock auszuführen.
-```{r message = FALSE, warning = FALSE}
-reinstall_faulty_packages()
-```
-
-Bestehen weiterhin Probleme, rufe den folgenden Codeblock auf. Die Funktion überprüft, welche Pakete fehlerhaft sind. Mache einen Screenshot davon und erstelle einen neuen Thread im Moodle-Forum.
-```{r}
-check_faulty_packages()
-```
-
-
+Handelt es sich beim fehlerhaften Paket nicht um das Paket `tinytex` kannst du trotzdem mit Schritt 4 der Installationsanleitung fortfahren. 

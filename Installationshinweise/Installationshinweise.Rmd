@@ -91,20 +91,21 @@ verfügen.
 Gehen Sie dann folgendermaßen vor:
 
 1. Laden Sie sich von 
-[dieser Seite](https://github.com/jbschulte/R-Tutorium-Installation) 
+[dieser Seite (https://github.com/jbschulte/R-Tutorium-Installation)](https://github.com/jbschulte/R-Tutorium-Installation) 
 den Code als ZIP-Archiv herunter indem 
 Sie auf `Code/Download ZIP` klicken: 
 ```{r fig.align='center', out.width='90%', echo=FALSE}
 knitr::include_graphics(
   here("Installationshinweise/figs/download_code_git.png"))
 ```
-Entpacken Sie das Archiv an einem geeigneten Ort auf Ihrem Computer.
 
-2. Öffnen Sie das R-Projekt durch einen Doppelklick auf die Datei
+2. Entpacken (Windows: Rechtsklick -> Alles Extrahieren; Mac: Doppelklick) Sie das Archiv an einem geeigneten Ort auf Ihrem Computer.
+
+3. Öffnen Sie das R-Projekt durch einen Doppelklick auf die Datei
 `Installation.Rproj`.
-3. Öffnen Sie die Datei `Installation_Skript.Rmd` in R-Studio, in dem Sie die Datei
-im Fenster `files` rechts unten auswählen.
-4. Folgen Sie den Anweisungen im Skript. Für die Installation müssen Sie
+4. Öffnen Sie die Datei `Installation_Skript.Rmd` in R-Studio, in dem Sie die Datei
+im Fenster `Files` rechts unten auswählen.
+5. Folgen Sie den Anweisungen im Skript. Für die Installation müssen Sie
 einige Codeblöcke ausführen. Um einen Codeblock auszuführen, klicken Sie auf 
 das grüne Dreieck rechts oben im Codeblock:
 ```{r fig.align='center', out.width='50%', echo=FALSE}
@@ -192,8 +193,7 @@ starten Ihren Computer neu und versuchen erneut `test.Rmd` zu kompillieren.
 ## Problem bei der Installation von matlib auf MacOS
 
 Manchmal führt die Installation des Pakets `matlib` zu Problemen auf dem 
-Mac. Das Paket bekommt nach Ausführung des obigen Skripts im
-Installationslogbuch den Status `FALSE` und wenn Sie das Paket mit dem Befehl
+Mac. Wenn Sie das Paket mit dem Befehl
 
 ```{r, eval=FALSE}
 library(matlib)

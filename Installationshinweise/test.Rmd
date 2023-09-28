@@ -3,15 +3,17 @@ title: "Test Skript"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Datei zum Testen Ihrer R-Markdown-Installation
 
 Kompillieren Sie dieses Dokument als PDF um zu überprüfen ob Sie R-Markdown
 korrekt installiert haben. 
-Wir keine PDF-Datei erstellt machen Sie bitte einen Screenshot von der 
+Wird keine PDF-Datei erstellt machen Sie bitte einen Screenshot von der 
 Fehlermeldung und posten Sie einen Eintrag in das einschlägige Forum.
 Falls eine Datei `test.log` erstellt wurde posten Sie bitte auch diese Datei
 mit ins Forum.
+
+Test-Code:
+```{r}
+1+1
+```
+
