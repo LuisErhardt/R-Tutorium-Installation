@@ -1,7 +1,7 @@
 ---
 title: "Hinweise zur Installation von R"
-author: "Jonas Schulte"
-date: "01.04.2023"
+author: "Luis Erhardt"
+date: "15.10.2025"
 output:
   pdf_document:
     number_sections: yes
@@ -91,7 +91,7 @@ verfügen.
 Gehen Sie dann folgendermaßen vor:
 
 1. Laden Sie sich von 
-[dieser Seite (https://github.com/jbschulte/R-Tutorium-Installation)](https://github.com/jbschulte/R-Tutorium-Installation) 
+[dieser Seite (https://github.com/LuisErhardt/R-Tutorium-Installation)](https://github.com/LuisErhardt/R-Tutorium-Installation) 
 den Code als ZIP-Archiv herunter indem 
 Sie auf `Code/Download ZIP` klicken: 
 ```{r fig.align='center', out.width='90%', echo=FALSE}

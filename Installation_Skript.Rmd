@@ -1,7 +1,7 @@
 ---
 title: "Installation der Packages"
-author: "Jonas Schulte"
-date: "01.10.2023"
+author: "Luis Erhardt"
+date: "15.10.2025"
 output: pdf_document
 ---
 
@@ -163,6 +163,6 @@ check_installed_packages <- function(pkg_names) {
 check_installed_packages(vektor_mit_allen_paketen)
 ```
 
-In der Console sollte dann eine Liste mit den fehlerhaften Packages oder eine Erfolgsmeldung erscheinen. Wenn nicht alle Pakete fehlerfrei installiert wurden, dann versuche das fehlerhafte Paket zunächst erneut zu installieren. Führe dafür in der Console (unten) den install.packages("Name des Pakets") Befehl aus. Achte dabei auf den Text der in der Console erscheint. Wenn die Installation wieder nicht funktioniert, mache einen Screenshot von der Fehlermeldung und erstelle ein neues Thema im Moodle-Forum. 
+In der Console sollte dann eine Liste mit den fehlerhaften Packages oder eine Erfolgsmeldung erscheinen. Wenn nicht alle Pakete fehlerfrei installiert wurden, dann versuche das fehlerhafte Paket zunächst erneut zu installieren. Führe dafür in der Console (unten) den install.packages("Name des Pakets") Befehl aus. Achte dabei auf den Text der in der Console erscheint. 
 
-Handelt es sich beim fehlerhaften Paket nicht um das Paket `tinytex` kannst du trotzdem mit Schritt 4 der Installationsanleitung fortfahren. 
+Handelt es sich beim fehlerhaften Paket um das Paket `tinytex` kannst du trotzdem mit Schritt 4 der Installationsanleitung fortfahren. 
